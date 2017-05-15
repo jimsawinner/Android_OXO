@@ -126,7 +126,7 @@ public class OXOFragment extends Fragment {
     private static void resetBoard(){
         for(int i=0;i<squares.length;i++){
             ImageButton iBtn = (ImageButton) oxoFragment.mContentView.findViewById(squares[i]);
-            iBtn.setImageResource(boardImages[i%2]);
+            iBtn.setImageResource(android.R.color.transparent);
         }
     }
 
