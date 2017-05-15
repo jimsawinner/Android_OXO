@@ -5,9 +5,10 @@ package com.teamtechuk.app.android_oxo.game;
  */
 
 public enum PlayerType {
-    ROCK(0),
-    PAPER(1),
-    SCISSORS(2);
+    CROSS(0),
+    NOUGHT(1),
+    FREE(2),
+    NO_WINNER(3);
 
     private final int id;
 
@@ -18,4 +19,5 @@ public enum PlayerType {
     public int getValue() {
         return id;
     }
+
 }

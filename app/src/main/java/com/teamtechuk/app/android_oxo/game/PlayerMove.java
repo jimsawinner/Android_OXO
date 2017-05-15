@@ -5,18 +5,29 @@ package com.teamtechuk.app.android_oxo.game;
  */
 
 public class PlayerMove {
-    private PlayerType player;
-    private int moveDetail;
+    PlayerType player;
+    String name;
+    int move;
 
-    public PlayerMove(PlayerType player) {
+    public PlayerMove(PlayerType player, int move){
         this.player = player;
+        this.move = move;
+        this.name = GameState.getThisGame().getMyName();
     }
 
-    public PlayerType getPlayerType() {
+    public int getMove(){
+        return move;
+    }
+
+    public PlayerType getPlayer(){
         return player;
     }
 
-    public int getMoveDetail() {
-        return moveDetail;
+    public void setPlayerName(String name){
+        this.name=name;
+    }
+
+    public String getPlayerName(){
+        return name;
     }
 }
