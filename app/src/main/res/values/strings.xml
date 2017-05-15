@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Android_OXO</string>
+    <string name="app_name">TicTacToe</string>
+    <string name="action_settings">Settings</string>
+    <string name="enable_p2p_button">P2P On/Off</string>
+    <string name="discover_peers_button">Discover</string>
+    <string name="disconnect_peer_button">Disconnect</string>
+    <string name="client_message_button">Client Message</string>
+    <string name="server_message_button">Server Message</string>
+    <string name="label_me">ME</string>
+    <string name="label_peers">PEERS</string>
+    <string name="empty"></string>
+    <string name="empty_message">No devices found. Turn on P2P and perform discovery from the Action Bar</string>
+    <string name="group_owner_text">Group Owner</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="client_text">Client text?</string>
 </resources>
