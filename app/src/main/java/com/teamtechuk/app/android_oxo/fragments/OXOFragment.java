@@ -27,8 +27,8 @@ public class OXOFragment extends Fragment {
     private static OXOFragment oxoFragment;
     private Gson gson;
     private PlayerState me;
-    private static int[] playerImages = {R.drawable.me,R.drawable.me};
-    private static int[] boardImages = {R.drawable.me,R.drawable.me};
+    private static int[] playerImages = {R.drawable.x,R.drawable.o};
+    private static int[] boardImages = {R.drawable.me,R.drawable.user};
 
     private static int[] squares = {
             R.id.sq_1, R.id.sq_2, R.id.sq_3,
@@ -52,7 +52,7 @@ public class OXOFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     deviceDetailFragment = (DeviceDetailFragment)getFragmentManager().
-                            findFragmentById(R.id.fragment_right);
+                            findFragmentById(R.id.frag_detail);
                     ImageButton iBtn = (ImageButton) v;
                     //first time set player detail
                     if(me==null) {

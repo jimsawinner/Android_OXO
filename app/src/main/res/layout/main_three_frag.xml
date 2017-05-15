@@ -9,7 +9,7 @@
         android:layout_column="0"
         android:layout_width="150sp"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_left"/>
+        android:id="@+id/frag_list"/>
 
     <fragment android:name="com.teamtechuk.app.android_oxo.fragments.OXOFragment"
         android:layout_column="1"
@@ -21,6 +21,6 @@
         android:layout_column="2"
         android:layout_width="150sp"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_right"/>
+        android:id="@+id/frag_detail"/>
 
 </GridLayout>

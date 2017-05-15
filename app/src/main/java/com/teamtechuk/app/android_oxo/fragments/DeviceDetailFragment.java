@@ -27,8 +27,7 @@ import com.teamtechuk.app.android_oxo.socket.SocketServerService;
  * Created by jimdixon on 15/05/2017.
  */
 
-public class DeviceDetailFragment extends Fragment
-        implements WifiP2pManager.ConnectionInfoListener {
+public class DeviceDetailFragment extends Fragment implements WifiP2pManager.ConnectionInfoListener {
     private View mContentView = null;
     private WifiP2pInfo info;
     private ProgressDialog progressDialog = null;
@@ -41,8 +40,7 @@ public class DeviceDetailFragment extends Fragment
         Intent serviceIntent = new Intent(getActivity(), DataSocketManager.class);
         serviceIntent.setAction(DataSocketManager.ACTION_SEND_MESSAGE);
         serviceIntent.putExtra(DataSocketManager.EXTRAS_MESSAGE, nextMove);
-        serviceIntent.putExtra(DataSocketManager.EXTRAS_GROUP_OWNER_ADDRESS,
-                info.groupOwnerAddress.getHostAddress());
+        serviceIntent.putExtra(DataSocketManager.EXTRAS_GROUP_OWNER_ADDRESS, info.groupOwnerAddress.getHostAddress());
         serviceIntent.putExtra(DataSocketManager.EXTRAS_GROUP_OWNER_PORT, port);
         getActivity().startService(serviceIntent);
     }
@@ -82,6 +80,7 @@ public class DeviceDetailFragment extends Fragment
                         ((DeviceActionListener) getActivity()).disconnect();
                     }
                 });
+
         mContentView.findViewById(R.id.btn_playAgain).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
