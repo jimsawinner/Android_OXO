@@ -1,121 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/details_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:columnCount="2"
+    android:rowCount="4"
     android:visibility="gone">
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/btn_disconnect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/disconnect_peer_button" />
-            <Button
-                android:id="@+id/client_send_msg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/client_message_button"
-                android:visibility="gone" />
-            <Button
-                android:id="@+id/server_send_msg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/server_message_button"
-                android:visibility="gone" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/device_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/device_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/group_owner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/group_ip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:rowCount="4"
-        android:columnCount="3">
-
-        <TextView
-            android:id="@+id/myMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Not Yet Set..." />
-
-        <TextView
-            android:id="@+id/opponentMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Not Yet Set..." />
-
-        <ImageButton
-            android:id="@+id/btn_rock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:background="@drawable/rock" />
-
-        <ImageButton
-            android:id="@+id/btn_paper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_column="1"
-            android:background="@drawable/paper" />
-
-        <ImageButton
-            android:id="@+id/btn_scissors"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_column="2"
-            android:background="@drawable/scissors" />
-
-    </GridLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:id="@+id/status_bar"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:layout_height="80dp"
-        android:visibility="gone"
-        android:background="@android:color/darker_gray">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:id="@+id/status_text">
-        </TextView>
-        <EditText
-            android:id="@+id/message_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:hint="Enter your message here.."
-            android:inputType="text"/>
-    </LinearLayout>
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:text="@string/disconnect_peer_button"/>
+    <Button
+        android:id="@+id/btn_playAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="Play Again"/>
+    <TextView
+        android:id="@+id/me_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:text="ME"
+        />
+    <TextView
+        android:id="@+id/opponent_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:text="YOU"
+        />
+</GridLayout>
