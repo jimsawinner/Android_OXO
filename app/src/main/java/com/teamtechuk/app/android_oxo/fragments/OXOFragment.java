@@ -3,6 +3,7 @@ package com.teamtechuk.app.android_oxo.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,19 +52,21 @@ public class OXOFragment extends Fragment {
             mContentView.findViewById(squares[i]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deviceDetailFragment = (DeviceDetailFragment)getFragmentManager().
-                            findFragmentById(R.id.frag_detail);
+                    deviceDetailFragment = (DeviceDetailFragment)getFragmentManager().findFragmentById(R.id.frag_detail);
                     ImageButton iBtn = (ImageButton) v;
+
                     //first time set player detail
                     if(me==null) {
                         me = new PlayerState(GameState.getThisGame().getMyName());
                         if (DeviceDetailFragment.isServer()) {
                             isServer=true;
+                            me.setName("Server");
                             me.setPlayerType(PlayerType.NOUGHT);
                             enableInterface(false);
                         }
                         else {
                             isServer=false;
+                            me.setName("Client");
                             me.setPlayerType(PlayerType.CROSS);
                             enableInterface(true);
                         }
@@ -90,6 +93,7 @@ public class OXOFragment extends Fragment {
     }
 
     public static void handleOpponentMove(PlayerMove playerMove){
+        Log.d("TAG", "Opponent move detected");
         Activity activity = oxoFragment.getActivity();
         View view = oxoFragment.mContentView;
         final ImageButton btn = (ImageButton) view.findViewById(squares[playerMove.getMove()]);
@@ -100,10 +104,14 @@ public class OXOFragment extends Fragment {
             public void run() {
                 btn.setImageResource(playerImages[pMove.getPlayer().getValue()]);
                 btn.setOnClickListener(null);
-                if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER)
+                if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
+                    Log.d("TAG", "Game over detected");
                     gameOverRoutine();
-                else
+                }else {
+                    Log.d("TAG", "Enable my interface!!!");
                     enableInterface(true);
+                }
+
             }
         });
     }
@@ -121,6 +129,7 @@ public class OXOFragment extends Fragment {
         GameState.getThisGame().newGame();
         resetBoard();
         enableInterface(!oxoFragment.isServer);
+
     }
 
     private static void resetBoard(){
@@ -132,5 +141,9 @@ public class OXOFragment extends Fragment {
 
     private void setPlayerNames(){
 
+    }
+
+    private void log(String msg){
+        Log.d(this.getClass().toString(),msg);
     }
 }

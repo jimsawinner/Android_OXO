@@ -46,7 +46,11 @@ public class PlayerState {
         gamesPlayed.add(winningPlayer);
     }
 
-    public boolean isItMyTurn(){return myTurn;}
+    public boolean isItMyTurn(){
+        return myTurn;
+    }
 
-    public void hadMyTurn(){myTurn = !myTurn;}
+    public void hadMyTurn(){
+        myTurn = !myTurn;
+    }
 }
