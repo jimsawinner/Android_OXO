@@ -65,6 +65,7 @@ public class DataSocketManager extends IntentService {
                         while(!myTurn){;}
                         out.print(message + '\n');
                         out.flush();
+                        log("Listening!");
                         listen=true;
                         myTurn=false;
                     }
@@ -75,6 +76,7 @@ public class DataSocketManager extends IntentService {
                             PlayerMove move = moveObject.fromJson(fromServer, PlayerMove.class);
                             DeviceDetailFragment.setOpponentMove(move);
                             log(fromServer);
+                            log("Not Listening!");
                             listen = false;
                             break;
                         }
