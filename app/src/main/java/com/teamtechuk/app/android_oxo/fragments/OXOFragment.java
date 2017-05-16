@@ -2,12 +2,14 @@ package com.teamtechuk.app.android_oxo.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.teamtechuk.app.android_oxo.R;
@@ -16,6 +18,7 @@ import com.teamtechuk.app.android_oxo.game.GameState;
 import com.teamtechuk.app.android_oxo.game.PlayerMove;
 import com.teamtechuk.app.android_oxo.game.PlayerState;
 import com.teamtechuk.app.android_oxo.game.PlayerType;
+import com.teamtechuk.app.android_oxo.socket.SocketServerService;
 
 /**
  * Created by jimdixon on 27/03/2017.
@@ -26,6 +29,7 @@ public class OXOFragment extends Fragment {
     private  boolean isServer;
     private DeviceDetailFragment deviceDetailFragment;
     private static OXOFragment oxoFragment;
+    private static ScoreBoardFragment scoreBoardFragment;
     private Gson gson;
     private PlayerState me;
     private static int[] playerImages = {R.drawable.x,R.drawable.o};
@@ -43,6 +47,7 @@ public class OXOFragment extends Fragment {
         gson = new Gson();
         setupBtnClicks();
         oxoFragment = this;
+        scoreBoardFragment = (ScoreBoardFragment) getFragmentManager().findFragmentById(R.id.frag_scoreboard);
         GameState.getThisGame();
         return mContentView;
     }
@@ -55,6 +60,8 @@ public class OXOFragment extends Fragment {
                     Log.d("TAG", "Button has been clicked");
                     deviceDetailFragment = (DeviceDetailFragment)getFragmentManager().findFragmentById(R.id.frag_detail);
                     ImageButton iBtn = (ImageButton) v;
+                    TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
+                    TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
 
                     //first time set player detail
                     if(me==null) {
@@ -75,17 +82,24 @@ public class OXOFragment extends Fragment {
                     }
                     iBtn.setImageResource(playerImages[me.getPlayerType().getValue()]);
                     iBtn.setOnClickListener(null);
+                    p1Label.setTextColor(Color.rgb(255,255,255));
+                    p2Label.setTextColor(Color.rgb(0,255,0));
                     enableInterface(false);
                     for (int i = 0; i < Board.MAX; i++) {
                         if (squares[i] == iBtn.getId()) {
                             PlayerMove pMove = new PlayerMove(me.getPlayerType(), i);
                             GameState.getThisGame().processPlayerMove(pMove);
-                            if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER)
+                            if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
                                 gameOverRoutine();
-                            if(isServer)
+                            }
+
+                            if(isServer) {
                                 deviceDetailFragment.sendServerMove(gson.toJson(pMove));
-                            else
+                                log("SendServerMove");
+                            }else {
                                 deviceDetailFragment.sendClientMove(gson.toJson(pMove));
+                                log("SendClientMove");
+                            }
                         }
                     }
                 }
@@ -111,6 +125,10 @@ public class OXOFragment extends Fragment {
                     gameOverRoutine();
                 }else {
                     Log.d("TAG", "Enable my interface!!!");
+                    TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
+                    TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
+                    p1Label.setTextColor(Color.rgb(0,255,0));
+                    p2Label.setTextColor(Color.rgb(255,255,255));
                     enableInterface(true);
                 }
 
@@ -121,17 +139,30 @@ public class OXOFragment extends Fragment {
     public static void enableInterface(boolean set){
         boolean[] enabledSquares = GameState.getThisGame().getEmptySquares();
         for(int i=0;i<squares.length;i++)
-            if(enabledSquares[i]){
+            if(enabledSquares[i]) {
                 ImageButton iBtn = (ImageButton) oxoFragment.mContentView.findViewById(squares[i]);
                 iBtn.setEnabled(set);
             }
     }
 
     public static void gameOverRoutine() {
+        TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
+        TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
+
         Log.d("TAG", "GAME OVER ROUTINE HIT");
         GameState.getThisGame().newGame();
         resetBoard();
+        oxoFragment.setupBtnClicks();
         enableInterface(!oxoFragment.isServer);
+        if(oxoFragment.isServer){
+            SocketServerService.nextTurn();
+
+            p1Label.setTextColor(Color.rgb(255,255,255));
+            p2Label.setTextColor(Color.rgb(0,255,0));
+        }else{
+            p1Label.setTextColor(Color.rgb(0,255,0));
+            p2Label.setTextColor(Color.rgb(255,255,255));
+        }
     }
 
     private static void resetBoard(){

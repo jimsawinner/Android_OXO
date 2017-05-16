@@ -84,6 +84,7 @@ public class SocketServerService extends IntentService {
                             }
 
                             if (!listen) {
+                                log("ready to send message...");
                                 while (!myTurn) {
                                     ;
                                 }
