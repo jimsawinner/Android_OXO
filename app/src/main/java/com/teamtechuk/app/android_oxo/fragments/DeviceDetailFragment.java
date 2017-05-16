@@ -60,7 +60,8 @@ public class DeviceDetailFragment extends Fragment
     public static void setOpponentMove(PlayerMove playerMove){
         Activity activity = deviceDetailFragment.getActivity();
         FragmentManager fManager = activity.getFragmentManager();
-        final OXOFragment oxoFragment = (OXOFragment) fManager.findFragmentById(R.id.fragment_centre);
+        final OXOFragment oxoFragment = (OXOFragment)
+                fManager.findFragmentById(R.id.fragment_centre);
         final PlayerMove nextMove = playerMove;
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -89,6 +90,7 @@ public class DeviceDetailFragment extends Fragment
                         OXOFragment.gameOverRoutine();
                     }
                 });
+        deviceDetailFragment = this;
         return mContentView;
     }
 

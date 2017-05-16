@@ -59,7 +59,7 @@ public class WifiDirectActivity extends Activity implements WifiP2pManager.Chann
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_three_frag);
         // add necessary intent values to be matched.
         //  Indicates a change in the Wi-Fi P2P status.
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);

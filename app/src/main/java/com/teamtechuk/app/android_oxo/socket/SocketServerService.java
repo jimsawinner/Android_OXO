@@ -75,6 +75,7 @@ public class SocketServerService extends IntentService {
                                 log("listening for client message...");
                                 clientMove = bufferedReader.readLine();
                                 if (clientMove != null) {
+                                    log(clientMove);
                                     PlayerMove move = moveObject.fromJson(clientMove, PlayerMove.class);
                                     DeviceDetailFragment.setOpponentMove(move);
 //                                    log(clientMessage);

@@ -14,54 +14,54 @@
             android:id="@+id/sq_1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/x"/>
 
         <ImageButton
             android:id="@+id/sq_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/o"/>
 
         <ImageButton
             android:id="@+id/sq_3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/x"/>
 
         <ImageButton
             android:id="@+id/sq_4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/o"/>
 
         <ImageButton
             android:id="@+id/sq_5"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/x"/>
 
         <ImageButton
             android:id="@+id/sq_6"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/o"/>
 
         <ImageButton
             android:id="@+id/sq_7"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/x"/>
 
         <ImageButton
             android:id="@+id/sq_8"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/o"/>
 
         <ImageButton
             android:id="@+id/sq_9"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/me"/>
+            android:src="@drawable/x"/>
     </GridLayout>
 </FrameLayout>
