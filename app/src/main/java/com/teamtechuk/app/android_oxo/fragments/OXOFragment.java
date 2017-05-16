@@ -52,6 +52,7 @@ public class OXOFragment extends Fragment {
             mContentView.findViewById(squares[i]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("TAG", "Button has been clicked");
                     deviceDetailFragment = (DeviceDetailFragment)getFragmentManager().findFragmentById(R.id.frag_detail);
                     ImageButton iBtn = (ImageButton) v;
 
@@ -104,6 +105,7 @@ public class OXOFragment extends Fragment {
             public void run() {
                 btn.setImageResource(playerImages[pMove.getPlayer().getValue()]);
                 btn.setOnClickListener(null);
+                Log.d("TAG", "Check for Winner");
                 if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
                     Log.d("TAG", "Game over detected");
                     gameOverRoutine();
@@ -126,10 +128,10 @@ public class OXOFragment extends Fragment {
     }
 
     public static void gameOverRoutine() {
+        Log.d("TAG", "GAME OVER ROUTINE HIT");
         GameState.getThisGame().newGame();
         resetBoard();
         enableInterface(!oxoFragment.isServer);
-
     }
 
     private static void resetBoard(){
