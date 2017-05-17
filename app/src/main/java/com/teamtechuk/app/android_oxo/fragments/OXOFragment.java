@@ -90,7 +90,7 @@ public class OXOFragment extends Fragment {
                             PlayerMove pMove = new PlayerMove(me.getPlayerType(), i);
                             GameState.getThisGame().processPlayerMove(pMove);
                             if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
-                                gameOverRoutine();
+                                gameOverRoutine(true);
                             }
 
                             if(isServer) {
@@ -122,7 +122,7 @@ public class OXOFragment extends Fragment {
                 Log.d("TAG", "Check for Winner");
                 if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
                     Log.d("TAG", "Game over detected");
-                    gameOverRoutine();
+                    gameOverRoutine(false);
                 }else {
                     Log.d("TAG", "Enable my interface!!!");
                     TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
@@ -145,21 +145,61 @@ public class OXOFragment extends Fragment {
             }
     }
 
-    public static void gameOverRoutine() {
+    public static void gameOverRoutine(boolean win) {
+        TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
+        TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
+        TextView p1Score = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_score);
+        TextView p2Score = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_score);
+
+        p1Label.setTextColor(Color.rgb(255,255,255));
+        p2Label.setTextColor(Color.rgb(255,255,255));
+
+        Log.d("TAG", "Game Over");
+        if(win){
+            Log.d("TAG", "You Win");
+            int score = Integer.parseInt(p1Score.getText().toString());
+            score++;
+            p1Score.setText(""+score);
+        }else{
+            Log.d("TAG", "You Lose");
+            int score = Integer.parseInt(p2Score.getText().toString());
+            score++;
+            p2Score.setText(""+score);
+        }
+//        GameState.getThisGame().newGame();
+//        resetBoard();
+//        oxoFragment.setupBtnClicks();
+//        enableInterface(!oxoFragment.isServer);
+//        if(oxoFragment.isServer){
+//            SocketServerService.nextTurn();
+//
+//            p1Label.setTextColor(Color.rgb(255,255,255));
+//            p2Label.setTextColor(Color.rgb(0,255,0));
+//        }else{
+//            p1Label.setTextColor(Color.rgb(0,255,0));
+//            p2Label.setTextColor(Color.rgb(255,255,255));
+//        }
+    }
+
+    public static void newGameRoutine() {
+        Log.d("TAG", "Start New Game");
         TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
         TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
 
-        Log.d("TAG", "GAME OVER ROUTINE HIT");
         GameState.getThisGame().newGame();
         resetBoard();
         oxoFragment.setupBtnClicks();
+
         enableInterface(!oxoFragment.isServer);
+
         if(oxoFragment.isServer){
+            Log.d("TAG", "Server Mode");
             SocketServerService.nextTurn();
 
             p1Label.setTextColor(Color.rgb(255,255,255));
             p2Label.setTextColor(Color.rgb(0,255,0));
         }else{
+            Log.d("TAG", "Client Mode");
             p1Label.setTextColor(Color.rgb(0,255,0));
             p2Label.setTextColor(Color.rgb(255,255,255));
         }
