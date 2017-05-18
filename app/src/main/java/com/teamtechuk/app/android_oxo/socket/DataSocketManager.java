@@ -65,6 +65,7 @@ public class DataSocketManager extends IntentService {
                         while(!myTurn){;}
                         out.print(message + '\n');
                         out.flush();
+//                        String fromServer = in.readLine(); // flush incoming?
                         log("Listening!");
                         listen=true;
                         myTurn=false;

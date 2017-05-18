@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.teamtechuk.app.android_oxo.game.GameState;
 import com.teamtechuk.app.android_oxo.game.PlayerMove;
 import com.teamtechuk.app.android_oxo.game.PlayerState;
 import com.teamtechuk.app.android_oxo.game.PlayerType;
+import com.teamtechuk.app.android_oxo.socket.DataSocketManager;
 import com.teamtechuk.app.android_oxo.socket.SocketServerService;
 
 /**
@@ -89,9 +91,6 @@ public class OXOFragment extends Fragment {
                         if (squares[i] == iBtn.getId()) {
                             PlayerMove pMove = new PlayerMove(me.getPlayerType(), i);
                             GameState.getThisGame().processPlayerMove(pMove);
-                            if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
-                                gameOverRoutine();
-                            }
 
                             if(isServer) {
                                 deviceDetailFragment.sendServerMove(gson.toJson(pMove));
@@ -99,6 +98,10 @@ public class OXOFragment extends Fragment {
                             }else {
                                 deviceDetailFragment.sendClientMove(gson.toJson(pMove));
                                 log("SendClientMove");
+                            }
+
+                            if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
+                                gameOverRoutine(true);
                             }
                         }
                     }
@@ -108,6 +111,10 @@ public class OXOFragment extends Fragment {
     }
 
     public static void handleOpponentMove(PlayerMove playerMove){
+        if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
+            return;
+        }
+
         Log.d("TAG", "Opponent move detected");
         Activity activity = oxoFragment.getActivity();
         View view = oxoFragment.mContentView;
@@ -122,7 +129,7 @@ public class OXOFragment extends Fragment {
                 Log.d("TAG", "Check for Winner");
                 if(GameState.getThisGame().checkForWinner() != PlayerType.NO_WINNER) {
                     Log.d("TAG", "Game over detected");
-                    gameOverRoutine();
+                    gameOverRoutine(false);
                 }else {
                     Log.d("TAG", "Enable my interface!!!");
                     TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
@@ -145,21 +152,65 @@ public class OXOFragment extends Fragment {
             }
     }
 
-    public static void gameOverRoutine() {
+    public static void gameOverRoutine(boolean win) {
+        TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
+        TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
+        TextView p1Score = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_score);
+        TextView p2Score = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_score);
+
+        p1Label.setTextColor(Color.rgb(255,255,255));
+        p2Label.setTextColor(Color.rgb(255,255,255));
+
+        Log.d("TAG", "Game Over");
+        resetBoard();
+        if(win){
+            Log.d("TAG", "You Win");
+            int score = Integer.parseInt(p1Score.getText().toString());
+            score++;
+            p1Score.setText(""+score);
+        }else{
+            Log.d("TAG", "You Lose");
+            int score = Integer.parseInt(p2Score.getText().toString());
+            score++;
+            p2Score.setText(""+score);
+        }
+//        GameState.getThisGame().newGame();
+//        resetBoard();
+//        oxoFragment.setupBtnClicks();
+//        enableInterface(!oxoFragment.isServer);
+//        if(oxoFragment.isServer){
+//            SocketServerService.nextTurn();
+//
+//            p1Label.setTextColor(Color.rgb(255,255,255));
+//            p2Label.setTextColor(Color.rgb(0,255,0));
+//        }else{
+//            p1Label.setTextColor(Color.rgb(0,255,0));
+//            p2Label.setTextColor(Color.rgb(255,255,255));
+//        }
+    }
+
+    public static void newGameRoutine() {
+        Log.d("TAG", "Start New Game");
+        resetBoard();
         TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
         TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
 
-        Log.d("TAG", "GAME OVER ROUTINE HIT");
         GameState.getThisGame().newGame();
-        resetBoard();
         oxoFragment.setupBtnClicks();
+
         enableInterface(!oxoFragment.isServer);
+
         if(oxoFragment.isServer){
+            Log.d("TAG", "Server Mode");
             SocketServerService.nextTurn();
 
             p1Label.setTextColor(Color.rgb(255,255,255));
             p2Label.setTextColor(Color.rgb(0,255,0));
         }else{
+            Log.d("TAG", "Client Mode");
+//            DataSocketManager.nextTurn();
+//            DataSocketManager.nextTurn();
+//            DataSocketManager.nextTurn();
             p1Label.setTextColor(Color.rgb(0,255,0));
             p2Label.setTextColor(Color.rgb(255,255,255));
         }

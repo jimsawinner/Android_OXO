@@ -87,7 +87,7 @@ public class DeviceDetailFragment extends Fragment
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        OXOFragment.gameOverRoutine();
+                        OXOFragment.newGameRoutine();
                     }
                 });
         deviceDetailFragment = this;
