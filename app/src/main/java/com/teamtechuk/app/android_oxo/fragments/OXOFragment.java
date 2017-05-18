@@ -45,7 +45,7 @@ public class OXOFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mContentView = inflater.inflate(R.layout.content_main, null);
+        mContentView = inflater.inflate(R.layout.game_board, null);
         gson = new Gson();
         setupBtnClicks();
         oxoFragment = this;

@@ -1,0 +1,67 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false">
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:rowCount="3">
+
+        <ImageButton
+            android:id="@+id/sq_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/x"/>
+
+        <ImageButton
+            android:id="@+id/sq_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/o"/>
+
+        <ImageButton
+            android:id="@+id/sq_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/x"/>
+
+        <ImageButton
+            android:id="@+id/sq_4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/o"/>
+
+        <ImageButton
+            android:id="@+id/sq_5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/x"/>
+
+        <ImageButton
+            android:id="@+id/sq_6"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/o"/>
+
+        <ImageButton
+            android:id="@+id/sq_7"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/x"/>
+
+        <ImageButton
+            android:id="@+id/sq_8"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/o"/>
+
+        <ImageButton
+            android:id="@+id/sq_9"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/x"/>
+    </GridLayout>
+</FrameLayout>

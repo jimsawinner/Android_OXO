@@ -9,19 +9,19 @@
         android:layout_column="0"
         android:layout_columnSpan="3"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
+        android:layout_height="50sp"
         android:id="@+id/frag_scoreboard"/>
 
 
     <fragment android:name="com.teamtechuk.app.android_oxo.fragments.DeviceListFragment"
         android:layout_column="0"
-        android:layout_width="50sp"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:id="@+id/frag_list"/>
 
     <fragment android:name="com.teamtechuk.app.android_oxo.fragments.OXOFragment"
         android:layout_column="1"
-        android:layout_width="600sp"
+        android:layout_width="400sp"
         android:layout_height="wrap_content"
         android:id="@+id/fragment_centre"/>
 

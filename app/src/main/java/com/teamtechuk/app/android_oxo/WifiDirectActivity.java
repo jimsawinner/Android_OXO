@@ -1,6 +1,8 @@
 package com.teamtechuk.app.android_oxo;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -59,7 +61,7 @@ public class WifiDirectActivity extends Activity implements WifiP2pManager.Chann
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_three_frag);
+        setContentView(R.layout.main_frag);
         // add necessary intent values to be matched.
         //  Indicates a change in the Wi-Fi P2P status.
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
@@ -162,11 +164,18 @@ public class WifiDirectActivity extends Activity implements WifiP2pManager.Chann
 
     @Override
     public void connect(WifiP2pConfig config) {
+        final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager().findFragmentById(R.id.frag_detail);
+//        FragmentTransaction ft = fragment.getFragmentManager().beginTransaction();
+
+//        ft.addToBackStack(null);
+//        ft.setCustomAnimations(R.anim.exit_to_left);
+
         manager.connect(channel, config, new WifiP2pManager.ActionListener() {
             @Override
             public void onSuccess() {
                 // nothing to to here
                 Toast.makeText(WifiDirectActivity.this, "Attempting to Connect", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
