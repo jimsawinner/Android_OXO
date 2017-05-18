@@ -14,4 +14,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="client_text">Client text?</string>
+    <string name="newgame">New Game</string>
+    <string name="rstscores">Reset Scores</string>
 </resources>
