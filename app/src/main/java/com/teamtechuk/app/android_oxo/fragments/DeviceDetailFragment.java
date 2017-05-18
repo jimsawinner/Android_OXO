@@ -81,14 +81,24 @@ public class DeviceDetailFragment extends Fragment
                     @Override
                     public void onClick(View v) {
                         ((DeviceActionListener) getActivity()).disconnect();
+//                        View oxo =
                     }
                 });
+
         mContentView.findViewById(R.id.btn_playAgain).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        
+                        v.setVisibility(View.INVISIBLE);
                         OXOFragment.newGameRoutine();
+                    }
+                });
+
+        mContentView.findViewById(R.id.btn_resetScores).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OXOFragment.resetScores();
                     }
                 });
         deviceDetailFragment = this;

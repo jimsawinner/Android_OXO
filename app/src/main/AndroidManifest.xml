@@ -32,7 +32,7 @@
         android:supportsRtl="true">
 
 
-        <activity android:name=".WifiDirectActivity">
+        <activity android:name=".WifiDirectActivity" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

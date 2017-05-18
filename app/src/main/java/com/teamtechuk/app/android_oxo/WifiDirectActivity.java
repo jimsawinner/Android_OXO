@@ -164,7 +164,7 @@ public class WifiDirectActivity extends Activity implements WifiP2pManager.Chann
 
     @Override
     public void connect(WifiP2pConfig config) {
-        final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager().findFragmentById(R.id.frag_detail);
+//        final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager().findFragmentById(R.id.frag_detail);
 //        FragmentTransaction ft = fragment.getFragmentManager().beginTransaction();
 
 //        ft.addToBackStack(null);

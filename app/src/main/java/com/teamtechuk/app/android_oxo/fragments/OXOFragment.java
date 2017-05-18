@@ -22,6 +22,8 @@ import com.teamtechuk.app.android_oxo.game.PlayerType;
 import com.teamtechuk.app.android_oxo.socket.DataSocketManager;
 import com.teamtechuk.app.android_oxo.socket.SocketServerService;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by jimdixon on 27/03/2017.
  */
@@ -51,6 +53,12 @@ public class OXOFragment extends Fragment {
         oxoFragment = this;
         scoreBoardFragment = (ScoreBoardFragment) getFragmentManager().findFragmentById(R.id.frag_scoreboard);
         GameState.getThisGame();
+        deviceDetailFragment = (DeviceDetailFragment)getFragmentManager().findFragmentById(R.id.frag_detail);
+        if(DeviceDetailFragment.isServer()) {
+            isServer = true;
+        }else{
+            isServer = false;
+        }
         return mContentView;
     }
 
@@ -152,6 +160,14 @@ public class OXOFragment extends Fragment {
             }
     }
 
+    private void playAgainEnable(boolean enable) {
+        if(enable){
+            deviceDetailFragment.getView().findViewById(R.id.btn_playAgain).setVisibility(View.VISIBLE);
+        }else{
+            deviceDetailFragment.getView().findViewById(R.id.btn_playAgain).setVisibility(View.INVISIBLE);
+        }
+    }
+
     public static void gameOverRoutine(boolean win) {
         TextView p1Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_name);
         TextView p2Label = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_name);
@@ -162,7 +178,7 @@ public class OXOFragment extends Fragment {
         p2Label.setTextColor(Color.rgb(255,255,255));
 
         Log.d("TAG", "Game Over");
-        resetBoard();
+//        resetBoard();
         if(win){
             Log.d("TAG", "You Win");
             int score = Integer.parseInt(p1Score.getText().toString());
@@ -174,6 +190,8 @@ public class OXOFragment extends Fragment {
             score++;
             p2Score.setText(""+score);
         }
+
+        oxoFragment.playAgainEnable(true);
 //        GameState.getThisGame().newGame();
 //        resetBoard();
 //        oxoFragment.setupBtnClicks();
@@ -229,5 +247,12 @@ public class OXOFragment extends Fragment {
 
     private void log(String msg){
         Log.d(this.getClass().toString(),msg);
+    }
+
+    public static void resetScores() {
+        TextView scores = (TextView) scoreBoardFragment.getView().findViewById(R.id.player1_score);
+        scores.setText("0");
+        scores = (TextView) scoreBoardFragment.getView().findViewById(R.id.player2_score);
+        scores.setText("0");
     }
 }
